@@ -23,4 +23,13 @@ export class CategoryListComponent implements OnInit {
     this.categoryService.getAll();
   }
 
+  addCatagory(){
+    let category: Category = {
+      name: 'Teste'
+    }
+
+    this.categoryService.add(category);
+  }
+
+
 }

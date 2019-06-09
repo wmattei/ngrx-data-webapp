@@ -5,16 +5,12 @@ import { MatButtonModule, MatCheckboxModule, MatProgressSpinnerModule } from '@a
 
 @NgModule({
   imports: [
-    CommonModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatProgressSpinnerModule
   ],
   declarations: [],
   exports: [
-    CommonModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatProgressSpinnerModule

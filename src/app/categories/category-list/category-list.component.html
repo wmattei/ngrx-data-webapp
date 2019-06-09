@@ -1,8 +1,10 @@
 <div *ngIf="categories$ | async">
     <div *ngFor="let category of categories$ | async">
-        {{category.name}}
+        {{category?.name}}
     </div>
 </div>
 
 
-<mat-progress-spinner *ngIf="loading$ | async; categoryList"></mat-progress-spinner>
+
+
+<mat-progress-spinner *ngIf="loading$ | async"></mat-progress-spinner>
