@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/core/model/category';
 import { CategoryService } from '../category.service';
+import { EntityOp } from 'ngrx-data';
 
 @Component({
   selector: 'app-category-list',

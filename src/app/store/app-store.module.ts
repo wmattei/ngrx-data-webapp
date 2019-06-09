@@ -10,8 +10,15 @@ import { entityConfig } from './entity-metadata';
 const apiHost = 'http://127.0.0.1:8000/api';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
-    root: apiHost,
-    timeout: 3000, // request timeout,
+  root: apiHost,
+  timeout: 3000, // request timeout,
+  entityHttpResourceUrls:
+  {
+    Category: { 
+      entityResourceUrl: `${apiHost}/categories`, 
+      collectionResourceUrl: `${apiHost}/categories` 
+    }
+  }
 }
 
 @NgModule({
