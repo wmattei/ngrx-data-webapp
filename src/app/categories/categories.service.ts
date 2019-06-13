@@ -4,14 +4,12 @@ import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } f
 
 import { map, tap } from 'rxjs/operators';
 import { Category } from '../core/model/category';
-import { CategoryDataService } from '../store/entity/category-data-service';
 
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService extends EntityCollectionServiceBase<Category> {
 
-    constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory,
-        private categoryData: CategoryDataService) {
+    constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
         super('Category', serviceElementsFactory);
     }
 

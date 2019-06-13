@@ -1,21 +1,39 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { MetaReducer, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../../environments/environment';
-import { EntityStoreModule } from './entity/entity-store.module';
+import { DefaultDataServiceConfig, NgrxDataModule, EntityCollectionReducerMethodsFactory } from 'ngrx-data';
+import { entityConfig } from './entity-config';
+import { AppEntityCollectionReducerMethodsFactory } from './reducer-methods';
 
+const apiHost = 'https://22580d6b-23db-42e1-8d3f-e253f98e437b.mock.pstmn.io/api';
 
-export const metaReducers: MetaReducer<any>[] = environment.production
-  ? []
-  : []; // [storeFreeze];
+const defaultDataServiceConfig: DefaultDataServiceConfig = {
+  root: apiHost,
+  timeout: 3000, // request timeout,
+  entityHttpResourceUrls:
+  {
+    Category: { 
+      entityResourceUrl: `${apiHost}/categories`, 
+      collectionResourceUrl: `${apiHost}/categories` 
+    }
+  }
+}
 
 @NgModule({
   imports: [
-    StoreModule.forRoot({}, { metaReducers }),
+    CommonModule,
+    StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    EntityStoreModule,
-    environment.production ? [] : StoreDevtoolsModule.instrument()
+    environment.production ? [] : StoreDevtoolsModule.instrument(),
+    NgrxDataModule.forRoot(entityConfig),
+  ],
+  declarations: [],
+  providers: [
+    { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
+    { provide: EntityCollectionReducerMethodsFactory, useClass: AppEntityCollectionReducerMethodsFactory },
   ]
 })
-export class AppStoreModule {}
+export class AppStoreModule { }
