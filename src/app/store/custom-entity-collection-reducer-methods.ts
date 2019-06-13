@@ -22,7 +22,6 @@ export class CustomEntityCollectionReducerMethods<T> extends EntityCollectionRed
     ): CustomEntityCollection {
         const data = this.extractData(action); 
         const mergeStrategy = this.extractMergeStrategy(action);
-        console.log(action);
         return {
             ...this.entityChangeTracker.mergeQueryResults(
                 (action.payload.data as any).data,

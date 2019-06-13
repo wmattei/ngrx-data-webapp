@@ -4,7 +4,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { RouterModule } from '@angular/router';
 import { CategoriesRoutes } from "./categories.routes";
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { CategoryService } from './categories.service';
 
 @NgModule({

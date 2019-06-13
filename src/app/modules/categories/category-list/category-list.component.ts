@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from 'src/app/core/model/category';
 import { CategoryService } from '../categories.service';
+import { Category } from '../category-model';
+import { Pageable } from 'src/app/core/model/pageable';
 
 @Component({
   selector: 'app-category-list',
@@ -12,18 +13,22 @@ export class CategoryListComponent implements OnInit {
 
   public loading$: Observable<boolean>;
   public categories$: Observable<Category[]>;
+
+  public page$: Observable<Pageable<Category>>;
+
   constructor(private categoryService: CategoryService) {
     this.categories$ = this.categoryService.entities$;
     this.loading$ = this.categoryService.loading$;
+    this.page$ = this.categoryService.pagination$;
   }
 
   ngOnInit() {
-    this.categoryService.getAll()
+    this.categoryService.getAll();
   }
 
   addCatagory() {
     let category: Category = {
-      name: 'Teste'
+      title: 'Teste'
     }
 
     this.categoryService.add(category);
