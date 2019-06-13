@@ -1,37 +1,21 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { DefaultDataServiceConfig, NgrxDataModule } from 'ngrx-data';
-import { entityConfig } from './entity-metadata';
+import { environment } from '../../environments/environment';
+import { EntityStoreModule } from './entity/entity-store.module';
 
-const apiHost = 'http://127.0.0.1:8000/api';
 
-const defaultDataServiceConfig: DefaultDataServiceConfig = {
-  root: apiHost,
-  timeout: 3000, // request timeout,
-  entityHttpResourceUrls:
-  {
-    Category: { 
-      entityResourceUrl: `${apiHost}/categories`, 
-      collectionResourceUrl: `${apiHost}/categories` 
-    }
-  }
-}
+export const metaReducers: MetaReducer<any>[] = environment.production
+  ? []
+  : []; // [storeFreeze];
 
 @NgModule({
   imports: [
-    CommonModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({}, { metaReducers }),
     EffectsModule.forRoot([]),
-    environment.production ? [] : StoreDevtoolsModule.instrument(),
-    NgrxDataModule.forRoot(entityConfig),
-  ],
-  declarations: [],
-  providers: [
-    { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }
+    EntityStoreModule,
+    environment.production ? [] : StoreDevtoolsModule.instrument()
   ]
 })
-export class AppStoreModule { }
+export class AppStoreModule {}
