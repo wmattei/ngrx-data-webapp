@@ -1,6 +1,6 @@
 <div *ngIf="categories$ | async">
     <div *ngFor="let category of categories$ | async">
-        {{category?.name}}
+        {{category?.title}}
     </div>
 </div>
 

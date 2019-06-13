@@ -4,10 +4,11 @@ import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { DefaultDataServiceConfig, NgrxDataModule } from 'ngrx-data';
+import { DefaultDataServiceConfig, NgrxDataModule, EntityCollectionReducerMethodsFactory } from 'ngrx-data';
 import { entityConfig } from './entity-metadata';
+import { AppEntityCollectionReducerMethodsFactory } from './reducer-methods';
 
-const apiHost = 'http://127.0.0.1:8000/api';
+const apiHost = 'https://22580d6b-23db-42e1-8d3f-e253f98e437b.mock.pstmn.io/api';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
   root: apiHost,
@@ -31,7 +32,8 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
   ],
   declarations: [],
   providers: [
-    { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }
+    { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
+    { provide: EntityCollectionReducerMethodsFactory, useClass: AppEntityCollectionReducerMethodsFactory },
   ]
 })
 export class AppStoreModule { }
